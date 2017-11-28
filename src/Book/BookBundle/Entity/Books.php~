@@ -58,16 +58,17 @@ class Books
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="Book\BookBundle\Entity\Categories", inversedBy="categories")
-     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
      *
+     * @ORM\Column(name="categoryId", type="integer")
      */
     private $categoryId;
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="Book\BookBundle\Entity\Borrowers", inversedBy="borrowers")
-     * @ORM\JoinColumn(name="borrowerId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Book\BookBundle\Entity\Borrowers", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     * @ORM\Column(name="borrowerId", type="integer")
      */
     private $borrowerId;
 
@@ -228,28 +229,27 @@ class Books
 
 
 
-
     /**
-     * Set borrowerId
+     * Set borrowers
      *
-     * @param integer $borrowerId
+     * @param integer $borrowers
      *
      * @return Books
      */
-    public function setBorrowerId($borrowerId)
+    public function setBorrowers($borrowers)
     {
-        $this->borrowerId = $borrowerId;
+        $this->borrowers = $borrowers;
 
         return $this;
     }
 
     /**
-     * Get borrowerId
+     * Get borrowers
      *
      * @return integer
      */
-    public function getBorrowerId()
+    public function getBorrowers()
     {
-        return $this->borrowerId;
+        return $this->borrowers;
     }
 }

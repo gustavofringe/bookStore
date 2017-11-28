@@ -2,17 +2,15 @@
 
 namespace Book\BookBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Borrowers
+ * Users
  *
- * @ORM\Table(name="borrowers")
- * @ORM\Entity(repositoryClass="Book\BookBundle\Repository\BorrowersRepository")
- *
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="Book\BookBundle\Repository\UsersRepository")
  */
-class Borrowers
+class Users
 {
     /**
      * @var int
@@ -20,7 +18,6 @@ class Borrowers
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Book\BookBundle\Entity\Books", mappedBy="books")
      */
     private $id;
 
@@ -31,6 +28,12 @@ class Borrowers
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="memberId", type="string", length=255)
+     */
+    private $memberId;
 
 
     /**
@@ -48,7 +51,7 @@ class Borrowers
      *
      * @param string $name
      *
-     * @return Borrowers
+     * @return Users
      */
     public function setName($name)
     {
@@ -68,43 +71,27 @@ class Borrowers
     }
 
     /**
-     * Set bookId
+     * Set memberId
      *
-     * @param integer $bookId
+     * @param string $memberId
      *
-     * @return Borrowers
+     * @return Users
      */
-    public function setBookId($bookId)
+    public function setMemberId($memberId)
     {
-        $this->bookId = $bookId;
+        $this->memberId = $memberId;
 
         return $this;
     }
 
     /**
-     * Get bookId
+     * Get memberId
      *
-     * @return int
+     * @return string
      */
-    public function getBookId()
+    public function getMemberId()
     {
-        return $this->bookId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTest()
-    {
-        return $this->test;
-    }
-
-    /**
-     * @param mixed $test
-     */
-    public function setTest($test)
-    {
-        $this->test = $test;
+        return $this->memberId;
     }
 }
 
