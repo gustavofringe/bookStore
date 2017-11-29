@@ -1,1 +1,10 @@
-Hello World!
+{% extends "BookBookBundle::layout.html.twig" %}
+{% block body %}
+    <h1>Se connecter</h1>
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+
+<input type="submit" />
+{{ form_end(form) }}
+{% endblock %}
