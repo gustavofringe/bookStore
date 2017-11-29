@@ -3,7 +3,7 @@
 namespace Book\BookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Users
  *
@@ -23,7 +23,7 @@ class Users
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message = "author.name.not_blank")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;

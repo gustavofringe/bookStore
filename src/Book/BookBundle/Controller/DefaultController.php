@@ -3,6 +3,7 @@
 namespace Book\BookBundle\Controller;
 
 use Book\BookBundle\DataFixtures\ORM\LoadBooks;
+use Book\BookBundle\Entity\Books;
 use Book\BookBundle\Entity\Users;
 use Book\BookBundle\Form\UsersType;
 use function sha1;
@@ -22,22 +23,10 @@ class DefaultController extends Controller
     {
         $users = new Users();
         $form = $this->createForm(UsersType::class, $users);
-
-        /*$task = new Users();
-        $task->setName('Write a blog post');
-        $task->setPassword(new \DateTime('tomorrow'));
-
-        $form = $this->createFormBuilder($task)
-            ->add('task', TextType::class)
-            ->add('dueDate', DateType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->getForm();
-
-        return $this->render('default/new.html.twig', array(
-            'form' => $form->createView(),
-        ));*/
         $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
+        if ($form->handleRequest($request)->isValid()) {
+            // ...
+        }
         return $this->render('BookBookBundle:Default:index.html.twig',[
             'form'=>$form->createView()
         ]);
@@ -49,6 +38,21 @@ class DefaultController extends Controller
      * )
      */
     public function viewAction(){
-        return new Response("lol");
-}
+        $books = $this->getDoctrine()
+            ->getRepository(Books::class)
+            ->findAll();
+        return $this->render('BookBookBundle:Book:index.html.twig', compact('books'));
+    }
+
+    /**
+     * @Route("/book/{id}",
+     *     name="single_view"
+     * )
+     * @param $id
+     */
+    public function viewSingleAction($id){
+        $repository = $this->getDoctrine()->getRepository(Books::class);
+        $product = $repository->find($id);
+        return $this->render("BookBookBundle:Book:view.html.twig",compact("product"));
+    }
 }
