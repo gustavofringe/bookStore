@@ -58,24 +58,28 @@ class Books
 
     /**
      * @var int
+     * @ORM\Column(name="categoryId", type="integer")
      * @ORM\ManyToOne(targetEntity="Book\BookBundle\Entity\Categories", inversedBy="categories")
-     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true)
      *
      */
-    private $categoryId;
+    private $category;
 
     /**
      * @var int
+     * @ORM\Column(name="borrowerId", type="integer")
      * @ORM\ManyToOne(targetEntity="Book\BookBundle\Entity\Borrowers", inversedBy="borrowers")
-     * @ORM\JoinColumn(name="borrowerId", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $borrowerId;
+    private $borrower;
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -195,7 +199,7 @@ class Books
     /**
      * Get available
      *
-     * @return bool
+     * @return boolean
      */
     public function getAvailable()
     {
@@ -203,53 +207,50 @@ class Books
     }
 
     /**
-     * Set categoryId
+     * Set category
      *
-     * @param integer $categoryId
+     * @param \Book\BookBundle\Entity\Categories $category
      *
      * @return Books
      */
-    public function setCategoryId($categoryId)
+    public function setCategory($category = null)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get category
      *
-     * @return int
+     * @return \Book\BookBundle\Entity\Categories
      */
-    public function getCategoryId()
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
-
-
-
     /**
-     * Set borrowerId
+     * Set borrower
      *
-     * @param integer $borrowerId
+     * @param \Book\BookBundle\Entity\Borrowers $borrower
      *
      * @return Books
      */
-    public function setBorrowerId($borrowerId)
+    public function setBorrower($borrower = null)
     {
-        $this->borrowerId = $borrowerId;
+        $this->borrower = $borrower;
 
         return $this;
     }
 
     /**
-     * Get borrowerId
+     * Get borrower
      *
-     * @return integer
+     * @return \Book\BookBundle\Entity\Borrowers
      */
-    public function getBorrowerId()
+    public function getBorrower()
     {
-        return $this->borrowerId;
+        return $this->borrower;
     }
 }

@@ -18,6 +18,7 @@ class Categories
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="Book\BookBundle\Entity\Books", mappedBy="books")
      */
     private $id;
 

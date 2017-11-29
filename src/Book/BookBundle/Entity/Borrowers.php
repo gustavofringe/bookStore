@@ -20,7 +20,7 @@ class Borrowers
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Book\BookBundle\Entity\Books", mappedBy="books")
+     *
      */
     private $id;
 
@@ -28,8 +28,16 @@ class Borrowers
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Book\BookBundle\Entity\Books", mappedBy="books")
      */
     private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="memberId", type="string", length=255)
+     */
+    private $memberId;
+
 
 
 
@@ -105,6 +113,22 @@ class Borrowers
     public function setTest($test)
     {
         $this->test = $test;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMemberId()
+    {
+        return $this->memberId;
+    }
+
+    /**
+     * @param string $memberId
+     */
+    public function setMemberId($memberId)
+    {
+        $this->memberId = $memberId;
     }
 }
 

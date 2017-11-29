@@ -10,7 +10,7 @@ use Faker;
 use function rand;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-class LoadData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadBooks extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $container;
     public function setContainer(ContainerInterface $container = null)
@@ -22,13 +22,15 @@ class LoadData extends AbstractFixture implements FixtureInterface, ContainerAwa
         $faker = Faker\Factory::create('fr_FR');
         $posts = [];
         for ($i=0;$i<20;$i++){
-            $posts[$i] = new Post();
-            $posts[$i]->setTitle($faker->sentence($nbWords = 2, $variableNbWords = true))
-                ->setAuthor($faker->firstNameFemale)
-                ->setViews($faker->numberBetween(1, 20000))
-                ->setCategories($faker->unique()->domainWord)
-                ->setCreatedAt($faker->dateTimeThisDecade($max = 'now', $timezone = date_default_timezone_get()))
-                ->setContent($faker->realText(rand(100,300)));
+            $posts[$i] = new Books();
+
+            $posts[$i]->setTitle($faker->sentence($nbWords = 2))
+                ->setAuthor($faker->name )
+                ->setResume($faker->text($maxNbChars = 5000))
+                ->setReleaseDate($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()))
+                ->setAvailable(0)
+                ->setCategory($faker->numberBetween($min = 1, $max = 5))
+                ->setBorrower($faker->numberBetween($min = 1, $max = 35));
             $manager->persist($posts[$i]);
         }
         $manager->flush();

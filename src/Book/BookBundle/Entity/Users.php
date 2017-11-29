@@ -27,13 +27,13 @@ class Users
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="memberId", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255)
      */
-    private $memberId;
+    private $password;
+
 
 
     /**
@@ -70,28 +70,21 @@ class Users
         return $this->name;
     }
 
-    /**
-     * Set memberId
-     *
-     * @param string $memberId
-     *
-     * @return Users
-     */
-    public function setMemberId($memberId)
-    {
-        $this->memberId = $memberId;
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
-     * Get memberId
-     *
-     * @return string
+     * @param string $password
      */
-    public function getMemberId()
+    public function setPassword($password)
     {
-        return $this->memberId;
+        $this->password = $password;
     }
 }
 
