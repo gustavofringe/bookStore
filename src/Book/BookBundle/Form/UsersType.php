@@ -3,7 +3,9 @@
 namespace Book\BookBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +18,9 @@ class UsersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         //$form->handleRequest();
-        $builder->add('name', TextType::class)
-            ->add('password', PasswordType::class);
+        $builder->add('name', TextType::class,['label'=>'Nom'])
+            ->add('password', PasswordType::class,['label'=>'Mot de passe'])
+        ->add('Valider', SubmitType::class,['attr'=>['class'=>'btn btn-primary']]);
     }
     
     /**
